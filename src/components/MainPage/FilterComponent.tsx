@@ -53,9 +53,9 @@ const FilterComponent = () => {
       </div>
       <button
         onClick={clearOptions}
-        className={`px-4 py-2 ${buttonClassNames}`}
+        className={`px-4 py-2 text-nowrap ${buttonClassNames}`}
       >
-        Clear filter options
+        Clear options
       </button>
     </div>
   );
