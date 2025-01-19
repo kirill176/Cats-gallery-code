@@ -4,8 +4,9 @@ import { useOptionContext } from "../../contexts/OptionContext";
 import { fetchCats } from "../../api/cats";
 import Loading from "../Loading";
 import Error from "../Error";
-import CatBox from "./CatBox";
+import CatBox from "../CatBox";
 import { catResponse } from "../../types/catsType";
+import { buttonClassNames } from "../../constants/constants";
 
 const CatsMasonryLayout = () => {
   const { selectedOptions } = useOptionContext();
@@ -42,7 +43,7 @@ const CatsMasonryLayout = () => {
       {data.length === limit && data.length < 100 && (
         <div className="flex justify-center mb-5">
           <button
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300"
+            className={`px-4 py-2 ${buttonClassNames}`}
             onClick={handleLoadingMore}
           >
             Load More

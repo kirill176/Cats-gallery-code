@@ -13,11 +13,3 @@ export interface catResponse {
   url: string;
   width: number;
 }
-
-export interface favCats {
-  id: number;
-  image: {
-    id: string;
-    url: string;
-  };
-}

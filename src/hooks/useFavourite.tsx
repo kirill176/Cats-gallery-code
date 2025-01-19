@@ -1,31 +1,24 @@
 import { useState } from "react";
-import { deleteFavouriteCat, postFavouriteCat } from "../api/favouriteCats";
+import { catResponse } from "../types/catsType";
 
 export const useFavourite = () => {
   const [favCats, setFavCats] = useState(
-    JSON.parse(localStorage.getItem("FavouriteIds") || "{}")
+    JSON.parse(localStorage.getItem("favourites") || "[]")
   );
 
-  const handleClickFavourite = async (catID: string) => {
-    const existingIds = JSON.parse(
-      localStorage.getItem("FavouriteIds") || "{}"
-    );
+  const handleClickFavourite = (cat: catResponse) => {
+    let existingCats = JSON.parse(localStorage.getItem("favourites") || "[]");
 
-    if (Object.values(existingIds).includes(catID)) {
-      const fav_id = Object.keys(existingIds).find(
-        (key) => existingIds[key] === catID
-      );
-      if (fav_id) {
-        delete existingIds[fav_id];
-        await deleteFavouriteCat(fav_id);
-      }
+    const isEcisting = existingCats.some((c: catResponse) => c.id === cat.id);
+
+    if (isEcisting) {
+      existingCats = existingCats.filter((c: catResponse) => c.id !== cat.id);
     } else {
-      const { id: fav_id } = await postFavouriteCat(catID);
-      existingIds[fav_id] = catID;
+      existingCats.push(cat);
     }
 
-    setFavCats(existingIds);
-    localStorage.setItem("FavouriteIds", JSON.stringify(existingIds));
+    setFavCats(existingCats);
+    localStorage.setItem("favourites", JSON.stringify(existingCats));
   };
 
   return { favCats, handleClickFavourite };

@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.64.1",
@@ -37,6 +38,7 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.16",
+    "gh-pages": "^6.3.0",
     "globals": "^15.14.0",
     "husky": "^8.0.0",
     "lint-staged": "^15.4.1",
@@ -49,5 +51,6 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": "eslint --fix"
-  }
+  },
+  "homepage": "https://username.github.io/cats-gallery-code"
 }

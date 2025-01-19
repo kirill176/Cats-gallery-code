@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import favicon from "../../public/favicon.ico";
 
 const Header = () => {
   return (
@@ -6,7 +7,7 @@ const Header = () => {
       <div className="w-full max-w-screen-lg px-4 py-2 m-auto flex flex-col sm:flex-row justify-between items-center">
         <div className="flex gap-3 items-center mb-4 sm:mb-0">
           <div className="w-10">
-            <img className="w-full" src="/favicon.ico" alt="Logo" />
+            <img className="w-full" src={favicon} alt="Logo" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-semibold text-color-blue">
             Cat Gallery

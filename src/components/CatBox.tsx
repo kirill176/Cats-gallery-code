@@ -1,7 +1,10 @@
 import { FC } from "react";
-import { catResponse } from "../../types/catsType";
-import { Link } from "react-router-dom";
-import { useFavourite } from "../../hooks/useFavourite";
+import { catResponse } from "../types/catsType";
+import { useNavigate } from "react-router-dom";
+import star from "../../public/images/star.ico";
+import favourite from "../../public/images/favourite.ico";
+import { useFavourite } from "../hooks/useFavourite";
+import { buttonClassNames } from "../constants/constants";
 
 interface propsType {
   cat: catResponse;
@@ -9,6 +12,11 @@ interface propsType {
 
 const CatBox: FC<propsType> = ({ cat }) => {
   const { favCats, handleClickFavourite } = useFavourite();
+  const navigate = useNavigate();
+
+  const handleClickMore = () => {
+    navigate(`/cat/${cat.id}`);
+  };
 
   return (
     <div className="rounded-md w-full overflow-hidden relative bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
@@ -21,13 +29,13 @@ const CatBox: FC<propsType> = ({ cat }) => {
         />
         <button
           className="absolute right-2 bottom-2 p-1 bg-white rounded-full shadow-md hover:bg-gray-100 transition duration-300"
-          onClick={() => handleClickFavourite(cat.id)}
+          onClick={() => handleClickFavourite(cat)}
         >
           <img
             src={
-              Object.values(favCats).includes(cat.id)
-                ? "images/favourite.ico"
-                : "images/star.ico"
+              favCats.some((favCat: catResponse) => favCat.id === cat.id)
+                ? favourite
+                : star
             }
             alt="Favourite Icon"
             className="w-5 h-5"
@@ -43,12 +51,12 @@ const CatBox: FC<propsType> = ({ cat }) => {
           <span className="font-medium">Country:</span>{" "}
           {cat.breeds.map((breed) => breed.origin).join(", ")}
         </p>
-        <Link
-          className="text-blue-600 hover:underline mt-2 inline-block"
-          to={`/cat/${cat.id}`}
+        <button
+          onClick={handleClickMore}
+          className={`px-3 py-1 my-2 ${buttonClassNames}`}
         >
           More information
-        </Link>
+        </button>
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getCat } from "../api/cats";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import { buttonClassNames } from "../constants/constants";
 
 const InformationPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,13 +32,12 @@ const InformationPage = () => {
 
   return (
     <div>
-      <Link
-        className="text-color-blue hover:text-blue-800 mb-4 block"
+      <button
         onClick={handleBackClick}
-        to=""
+        className={`px-4 py-2 ${buttonClassNames}`}
       >
         {"<- return back"}
-      </Link>
+      </button>
       <div className="flex flex-col gap-12 md:flex-row md:gap-4 my-8">
         <div className="w-full md:w-1/2 rounded-md overflow-hidden">
           <img className="w-full h-full object-cover" src={data.url} alt="" />
