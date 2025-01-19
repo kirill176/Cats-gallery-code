@@ -18,6 +18,8 @@ const CatBox: FC<propsType> = ({ cat }) => {
     navigate(`/cat/${cat.id}`);
   };
 
+  const { name, origin } = cat.breeds[0] || {};
+
   return (
     <div className="rounded-md w-full overflow-hidden relative bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
       <div className="relative">
@@ -44,12 +46,12 @@ const CatBox: FC<propsType> = ({ cat }) => {
       </div>
       <div className="p-4">
         <p className="text-sm text-gray-700">
-          <span className="font-medium">Breed:</span>{" "}
-          {cat.breeds.map((breed) => breed.name).join(", ")}
+          <span className="font-medium">Breed: </span>
+          {name}
         </p>
         <p className="text-sm text-gray-700">
-          <span className="font-medium">Country:</span>{" "}
-          {cat.breeds.map((breed) => breed.origin).join(", ")}
+          <span className="font-medium">Country: </span>
+          {origin}
         </p>
         <button
           onClick={handleClickMore}
